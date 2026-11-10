@@ -1,0 +1,14 @@
+[
+  {
+    "container": "parquet-rag-Active",
+    "sizeTiB": 42.5,
+    "rolling14dReadsPerGiB": 18.4,
+    "action": "VETO_TIERING_HIGH_READ_VELOCITY"
+  },
+  {
+    "container": "compliance-archive-2024",
+    "sizeTiB": 120,
+    "rolling14dReadsPerGiB": 0,
+    "action": "PERMIT_COOL_TIERING"
+  }
+]

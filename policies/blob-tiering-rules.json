@@ -1,0 +1,21 @@
+{
+  "rules": [
+    {
+      "name": "tier-to-cool-after-low-read-velocity",
+      "enabled": true,
+      "type": "Lifecycle",
+      "definition": {
+        "actions": {
+          "baseBlob": {
+            "tierToCool": {
+              "daysAfterLastAccessTimeGreaterThan": 30
+            },
+            "tierToArchive": {
+              "daysAfterLastAccessTimeGreaterThan": 180
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+// Track Azure AI Search HNSW vector bloat and tombstone eviction runs
+VectorLifecycleAudit_CL
+| where TimeGenerated > ago(7d)
+| summarize 
+    ActiveVectors = max(ActiveVectorCount_d),
+    TombstonedVectors = sum(TombstonedCount_d),
+    ArchivedColdChunks = sum(ArchivedChunkCount_d),
+    EstimatedRamSavedGb = sum(ReclaimedMemoryGb_d)
+    by IndexName_s, bin(TimeGenerated, 1d)
+| extend BloatReductionPct = round((todouble(TombstonedVectors + ArchivedColdChunks) / todouble(ActiveVectors + TombstonedVectors)) * 100.0, 1)
+| project TimeGenerated, IndexName_s, ActiveVectors, TombstonedVectors, ArchivedColdChunks, EstimatedRamSavedGb, BloatReductionPct
